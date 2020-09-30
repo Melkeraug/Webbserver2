@@ -1,31 +1,9 @@
-console.log("Tabben i pungen")
+const express = require('express')
+const labb = require('./labb')
+const app = express()
+const port = 3000
 
-let name = "Akta mannen git git"
+labb.add("1", 2)
 
-console.log(name)
-
-name = "Melker"
-
-console.log(name)
-
-let age = 17
-
-console.log("My age is: " + age)
-
-age ++
-
-console.log("My age next year will be: " + age)
-
-let alive = true
-
-if (!alive){
-    console.log("You are alive")
-}
-else{
-    console.log("You are dead")
-}
-
-if (age == 18) {
-    console.log("ung och dum")
-}
-
+app.get('/', (req, res) => res.send('Hello World!'))
+app.listen(port, () => console.log(`Example app listening on port port!`))
