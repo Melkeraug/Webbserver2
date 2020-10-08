@@ -1,6 +1,5 @@
 const express = require('express')
 const databaseModule = require('./databaseModule')
-const ejs = require('ejs')
 const app = express()
 const port = 3000
 
@@ -9,18 +8,16 @@ const clientDir = __dirname + "\\client\\"
 app.use(express.json())
 app.use(express.urlencoded())
 
-app.set('view-engine', 'ejs')
-
 app.get('/', (req, res) => {
-  res.render("pages/index.ejs", {name:""})
+  res.sendFile(clientDir + "index.html")
 })
 
 app.get('/bajs', (req, res) => {
-  res.sendFile(clientDir + "index.css")
+  res.sendFile(clientDir + "stule.css")
 })
 
-app.get('/volvo', (req, res) => {
-  res.sendFile(clientDir + "volvo240.jpg")
+app.get('/jesus', (req, res) => {
+  res.sendFile(clientDir + "download.jpg")
 })
 
 app.post('/', (req, res) => {
@@ -29,7 +26,7 @@ app.post('/', (req, res) => {
 
   databaseModule.storePerson(req.body.name, req.body.email, req.body.age)
 
-  res.render("pages/index.ejs", { name: " " + req.body.name })
+  res.redirect('/')
 })
 
 app.listen(port, () => {

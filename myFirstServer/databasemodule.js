@@ -1,28 +1,19 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/webbserver2', { useNewUrlParser: true, useUnifiedTopology: true });
+const personModel = require('./personModel')
 
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function () {
-    // we're connected!
-});
+exports.DB = () => {
+  mongoose.connect('mongodb://localhost/webbserver2', { useNewUrlParser: true, useUnifiedTopology: true });
+  {useNewUrlParser: true, useUnifiedTopology: true});
 
-const personSchema = new mongoose.Schema({
-  name: String,
-  email: String,
-  age: Number
-});
+    const db = mongoose.connection;
+  db.on('error', console.error.bind(console, 'connection error:'));
+  db.once('open', function () {
+      console.log("Great, you startedd your database")
+  });
+}
 
-const Person = mongoose.model('Person', personSchema);
-
-exports.storePerson = (name, email, age) => {
-    var person = new Person({
-        name: name, 
-        email: email, 
-        age: age 
-       })
-    
-     person.save((result)=>{
-       console.log(result)
-     })
- }
+exports.storeElement = (Element) => {
+  Element.save(() => {
+    console.log("Sucessfully saved a person in database")
+  })
+}
