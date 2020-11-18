@@ -1,12 +1,18 @@
 const mongoose = require('mongoose');
+const personModel = require('./personModel')
+
 mongoose.connect('mongodb://localhost/webbserver2', { useNewUrlParser: true, useUnifiedTopology: true });
+
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
-    // we're connected!
+  console.log("Great, you startedd your database")
 });
 
-exports.storeElement = async (element) => {
-    await element.save()
- }
+
+exports.storeElement = (Element) => {
+  Element.save(() => {
+    console.log("Sucessfully saved a person in database")
+  })
+}

@@ -2,8 +2,6 @@ const express = require('express')
 const databaseModule = require('./databaseModule')
 const MessageModel = require('./MessageModel')
 const UserModel = require('./UserModel')
-
-const ejs = require('ejs')
 const app = express()
 const port = 3000
 
@@ -15,11 +13,6 @@ app.use(express.urlencoded())
 app.set('view-engine', 'ejs')
 
 app.use(express.static(clientDir))
-
-app.get('/', (req, res) => {
-  res.render("pages/index.ejs", {name:""})
-})
-
 app.get('/messages', async (req, res) => {
 
   const messages = await MessageModel.getAllMessages()
@@ -41,7 +34,7 @@ app.post('/', (req, res) => {
 
   databaseModule.storePerson(req.body.name, req.body.email, req.body.age)
 
-  res.render("pages/index.ejs", { name: " " + req.body.name })
+  res.redirect('/')
 })
 
 app.post('/poo', (req, res) => {
